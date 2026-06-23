@@ -16,7 +16,7 @@ export default function Footer() {
           <div className="foot-col">
             <h5>The Archives</h5>
             <a href="#services">Media Buying &amp; OOH/DOOH</a>
-            <a href="#services">Social &amp; Performance</a>
+            <a href="#services">Social &amp; Performance Marketing</a>
             <a href="#services">PR &amp; Ad Production</a>
             <a href="#services">Event Management</a>
           </div>
@@ -43,7 +43,7 @@ export default function Footer() {
           </div>
           <div className="foot-col">
             <h5>Get in touch</h5>
-            <a href="tel:+971509231354">+971 509 231 354</a>
+            <a href="tel:+971509231354">+971 50 923 1354</a>
             <a href="mailto:info@thestriveads.com">info@thestriveads.com</a>
             <a href="#">Business Bay, Dubai, UAE</a>
             <iframe
@@ -56,7 +56,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="foot-bottom">
-          <span>© 2025 TheStriveAds. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} TheStriveAds. All rights reserved.</span>
           <span>
             <a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Sitemap</a>
           </span>

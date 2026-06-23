@@ -15,13 +15,14 @@ import GlobeLocations from '@/components/GlobeLocations';
 
 /* ===== DATA ===== */
 const brandsRow1 = [
-  'Al Madina Group', 'Shaklan Group', 'Talal Group', 'O Gold',
+  'Al Madina Group', 'Talal Group', 'O Gold',
   'Al Amin Opticals', 'AB Mauri', 'Bharat Petroleum', 'Canon',
-  'Cadbury', 'Dulux',
+  'Cadbury', 'Dulux', 'SKR Building Contracting',
 ];
 const brandsRow2 = [
-  'Tajvi Jewellers', 'Zaiba Jewellers', 'ISonic', 'Bismi Wholesale',
+  'Tajvi Jewellers', 'Zaiba Jewellers', 'Bismi Wholesale',
   'The Hindu', 'Ericsson', 'Sun Group', 'Britannia', 'Cafe Coffee Day',
+  'Refyne', 'Shaz Software',
 ];
 
 const countryOptions = [
@@ -37,7 +38,7 @@ const countryOptions = [
 ];
 
 const otherCountries = [
-  ['DZ','213','Algeria'],['AD','376','Andorra'],['AO','244','Angola'],['AI','1264','Anguilla'],['AG','1268','Antigua & Barbuda'],['AR','54','Argentina'],['AM','374','Armenia'],['AW','297','Aruba'],['AU','61','Australia'],['AT','43','Austria'],['AZ','994','Azerbaijan'],['BS','1242','Bahamas'],['BD','880','Bangladesh'],['BB','1246','Barbados'],['BY','375','Belarus'],['BE','32','Belgium'],['BZ','501','Belize'],['BJ','229','Benin'],['BM','1441','Bermuda'],['BT','975','Bhutan'],['BO','591','Bolivia'],['BA','387','Bosnia Herzegovina'],['BW','267','Botswana'],['BR','55','Brazil'],['BN','673','Brunei'],['BG','359','Bulgaria'],['BF','226','Burkina Faso'],['BI','257','Burundi'],['KH','855','Cambodia'],['CM','237','Cameroon'],['CA','1','Canada'],['CV','238','Cape Verde Islands'],['KY','1345','Cayman Islands'],['CF','236','Central African Republic'],['CL','56','Chile'],['CN','86','China'],['CO','57','Colombia'],['KM','269','Comoros'],['CG','242','Congo'],['CK','682','Cook Islands'],['CR','506','Costa Rica'],['HR','385','Croatia'],['CU','53','Cuba'],['CY','90392','Cyprus North'],['CY','357','Cyprus South'],['CZ','42','Czech Republic'],['DK','45','Denmark'],['DJ','253','Djibouti'],['DM','1809','Dominica'],['DO','1809','Dominican Republic'],['EC','593','Ecuador'],['EG','20','Egypt'],['SV','503','El Salvador'],['GQ','240','Equatorial Guinea'],['ER','291','Eritrea'],['EE','372','Estonia'],['ET','251','Ethiopia'],['FK','500','Falkland Islands'],['FO','298','Faroe Islands'],['FJ','679','Fiji'],['FI','358','Finland'],['FR','33','France'],['GF','594','French Guiana'],['PF','689','French Polynesia'],['GA','241','Gabon'],['GM','220','Gambia'],['GE','7880','Georgia'],['DE','49','Germany'],['GH','233','Ghana'],['GI','350','Gibraltar'],['GR','30','Greece'],['GL','299','Greenland'],['GD','1473','Grenada'],['GP','590','Guadeloupe'],['GU','671','Guam'],['GT','502','Guatemala'],['GN','224','Guinea'],['GW','245','Guinea - Bissau'],['GY','592','Guyana'],['HT','509','Haiti'],['HN','504','Honduras'],['HK','852','Hong Kong'],['HU','36','Hungary'],['IS','354','Iceland'],['ID','62','Indonesia'],['IR','98','Iran'],['IQ','964','Iraq'],['IE','353','Ireland'],['IL','972','Israel'],['IT','39','Italy'],['JM','1876','Jamaica'],['JP','81','Japan'],['JO','962','Jordan'],['KZ','7','Kazakhstan'],['KE','254','Kenya'],['KI','686','Kiribati'],['KP','850','Korea North'],['KR','82','Korea South'],['KG','996','Kyrgyzstan'],['LA','856','Laos'],['LV','371','Latvia'],['LB','961','Lebanon'],['LS','266','Lesotho'],['LR','231','Liberia'],['LY','218','Libya'],['LI','417','Liechtenstein'],['LT','370','Lithuania'],['LU','352','Luxembourg'],['MO','853','Macao'],['MK','389','Macedonia'],['MG','261','Madagascar'],['MW','265','Malawi'],['MY','60','Malaysia'],['MV','960','Maldives'],['ML','223','Mali'],['MT','356','Malta'],['MH','692','Marshall Islands'],['MQ','596','Martinique'],['MR','222','Mauritania'],['YT','269','Mayotte'],['MX','52','Mexico'],['FM','691','Micronesia'],['MD','373','Moldova'],['MC','377','Monaco'],['MN','976','Mongolia'],['MS','1664','Montserrat'],['MA','212','Morocco'],['MZ','258','Mozambique'],['MM','95','Myanmar'],['NA','264','Namibia'],['NR','674','Nauru'],['NP','977','Nepal'],['NL','31','Netherlands'],['NC','687','New Caledonia'],['NZ','64','New Zealand'],['NI','505','Nicaragua'],['NE','227','Niger'],['NG','234','Nigeria'],['NU','683','Niue'],['NF','672','Norfolk Islands'],['NP2','670','Northern Marianas'],['NO','47','Norway'],['PW','680','Palau'],['PA','507','Panama'],['PG','675','Papua New Guinea'],['PY','595','Paraguay'],['PE','51','Peru'],['PH','63','Philippines'],['PL','48','Poland'],['PT','351','Portugal'],['PR','1787','Puerto Rico'],['RE','262','Reunion'],['RO','40','Romania'],['RU','7','Russia'],['RW','250','Rwanda'],['SM','378','San Marino'],['ST','239','Sao Tome & Principe'],['SN','221','Senegal'],['CS','381','Serbia'],['SC','248','Seychelles'],['SL','232','Sierra Leone'],['SG','65','Singapore'],['SK','421','Slovak Republic'],['SI','386','Slovenia'],['SB','677','Solomon Islands'],['SO','252','Somalia'],['ZA','27','South Africa'],['ES','34','Spain'],['LK','94','Sri Lanka'],['SH','290','St. Helena'],['KN','1869','St. Kitts'],['LC','1758','St. Lucia'],['SD','249','Sudan'],['SR','597','Suriname'],['SZ','268','Swaziland'],['SE','46','Sweden'],['CH','41','Switzerland'],['SY','963','Syria'],['TW','886','Taiwan'],['TJ','7','Tajikstan'],['TH','66','Thailand'],['TG','228','Togo'],['TO','676','Tonga'],['TT','1868','Trinidad & Tobago'],['TN','216','Tunisia'],['TR','90','Turkey'],['TM','993','Turkmenistan'],['TC','1649','Turks & Caicos Islands'],['TV','688','Tuvalu'],['UG','256','Uganda'],['UA','380','Ukraine'],['UY','598','Uruguay'],['UZ','7','Uzbekistan'],['VU','678','Vanuatu'],['VA','379','Vatican City'],['VE','58','Venezuela'],['VN','84','Vietnam'],['VG','1284','Virgin Islands - British'],['VI','1340','Virgin Islands - US'],['WF','681','Wallis & Futuna'],['YE','969','Yemen (North)'],['YE2','967','Yemen (South)'],['ZM','260','Zambia'],['ZW','263','Zimbabwe']
+  ['DZ', '213', 'Algeria'], ['AD', '376', 'Andorra'], ['AO', '244', 'Angola'], ['AI', '1264', 'Anguilla'], ['AG', '1268', 'Antigua & Barbuda'], ['AR', '54', 'Argentina'], ['AM', '374', 'Armenia'], ['AW', '297', 'Aruba'], ['AU', '61', 'Australia'], ['AT', '43', 'Austria'], ['AZ', '994', 'Azerbaijan'], ['BS', '1242', 'Bahamas'], ['BD', '880', 'Bangladesh'], ['BB', '1246', 'Barbados'], ['BY', '375', 'Belarus'], ['BE', '32', 'Belgium'], ['BZ', '501', 'Belize'], ['BJ', '229', 'Benin'], ['BM', '1441', 'Bermuda'], ['BT', '975', 'Bhutan'], ['BO', '591', 'Bolivia'], ['BA', '387', 'Bosnia Herzegovina'], ['BW', '267', 'Botswana'], ['BR', '55', 'Brazil'], ['BN', '673', 'Brunei'], ['BG', '359', 'Bulgaria'], ['BF', '226', 'Burkina Faso'], ['BI', '257', 'Burundi'], ['KH', '855', 'Cambodia'], ['CM', '237', 'Cameroon'], ['CA', '1', 'Canada'], ['CV', '238', 'Cape Verde Islands'], ['KY', '1345', 'Cayman Islands'], ['CF', '236', 'Central African Republic'], ['CL', '56', 'Chile'], ['CN', '86', 'China'], ['CO', '57', 'Colombia'], ['KM', '269', 'Comoros'], ['CG', '242', 'Congo'], ['CK', '682', 'Cook Islands'], ['CR', '506', 'Costa Rica'], ['HR', '385', 'Croatia'], ['CU', '53', 'Cuba'], ['CY', '90392', 'Cyprus North'], ['CY', '357', 'Cyprus South'], ['CZ', '42', 'Czech Republic'], ['DK', '45', 'Denmark'], ['DJ', '253', 'Djibouti'], ['DM', '1809', 'Dominica'], ['DO', '1809', 'Dominican Republic'], ['EC', '593', 'Ecuador'], ['EG', '20', 'Egypt'], ['SV', '503', 'El Salvador'], ['GQ', '240', 'Equatorial Guinea'], ['ER', '291', 'Eritrea'], ['EE', '372', 'Estonia'], ['ET', '251', 'Ethiopia'], ['FK', '500', 'Falkland Islands'], ['FO', '298', 'Faroe Islands'], ['FJ', '679', 'Fiji'], ['FI', '358', 'Finland'], ['FR', '33', 'France'], ['GF', '594', 'French Guiana'], ['PF', '689', 'French Polynesia'], ['GA', '241', 'Gabon'], ['GM', '220', 'Gambia'], ['GE', '7880', 'Georgia'], ['DE', '49', 'Germany'], ['GH', '233', 'Ghana'], ['GI', '350', 'Gibraltar'], ['GR', '30', 'Greece'], ['GL', '299', 'Greenland'], ['GD', '1473', 'Grenada'], ['GP', '590', 'Guadeloupe'], ['GU', '671', 'Guam'], ['GT', '502', 'Guatemala'], ['GN', '224', 'Guinea'], ['GW', '245', 'Guinea - Bissau'], ['GY', '592', 'Guyana'], ['HT', '509', 'Haiti'], ['HN', '504', 'Honduras'], ['HK', '852', 'Hong Kong'], ['HU', '36', 'Hungary'], ['IS', '354', 'Iceland'], ['ID', '62', 'Indonesia'], ['IR', '98', 'Iran'], ['IQ', '964', 'Iraq'], ['IE', '353', 'Ireland'], ['IL', '972', 'Israel'], ['IT', '39', 'Italy'], ['JM', '1876', 'Jamaica'], ['JP', '81', 'Japan'], ['JO', '962', 'Jordan'], ['KZ', '7', 'Kazakhstan'], ['KE', '254', 'Kenya'], ['KI', '686', 'Kiribati'], ['KP', '850', 'Korea North'], ['KR', '82', 'Korea South'], ['KG', '996', 'Kyrgyzstan'], ['LA', '856', 'Laos'], ['LV', '371', 'Latvia'], ['LB', '961', 'Lebanon'], ['LS', '266', 'Lesotho'], ['LR', '231', 'Liberia'], ['LY', '218', 'Libya'], ['LI', '417', 'Liechtenstein'], ['LT', '370', 'Lithuania'], ['LU', '352', 'Luxembourg'], ['MO', '853', 'Macao'], ['MK', '389', 'Macedonia'], ['MG', '261', 'Madagascar'], ['MW', '265', 'Malawi'], ['MY', '60', 'Malaysia'], ['MV', '960', 'Maldives'], ['ML', '223', 'Mali'], ['MT', '356', 'Malta'], ['MH', '692', 'Marshall Islands'], ['MQ', '596', 'Martinique'], ['MR', '222', 'Mauritania'], ['YT', '269', 'Mayotte'], ['MX', '52', 'Mexico'], ['FM', '691', 'Micronesia'], ['MD', '373', 'Moldova'], ['MC', '377', 'Monaco'], ['MN', '976', 'Mongolia'], ['MS', '1664', 'Montserrat'], ['MA', '212', 'Morocco'], ['MZ', '258', 'Mozambique'], ['MM', '95', 'Myanmar'], ['NA', '264', 'Namibia'], ['NR', '674', 'Nauru'], ['NP', '977', 'Nepal'], ['NL', '31', 'Netherlands'], ['NC', '687', 'New Caledonia'], ['NZ', '64', 'New Zealand'], ['NI', '505', 'Nicaragua'], ['NE', '227', 'Niger'], ['NG', '234', 'Nigeria'], ['NU', '683', 'Niue'], ['NF', '672', 'Norfolk Islands'], ['NP2', '670', 'Northern Marianas'], ['NO', '47', 'Norway'], ['PW', '680', 'Palau'], ['PA', '507', 'Panama'], ['PG', '675', 'Papua New Guinea'], ['PY', '595', 'Paraguay'], ['PE', '51', 'Peru'], ['PH', '63', 'Philippines'], ['PL', '48', 'Poland'], ['PT', '351', 'Portugal'], ['PR', '1787', 'Puerto Rico'], ['RE', '262', 'Reunion'], ['RO', '40', 'Romania'], ['RU', '7', 'Russia'], ['RW', '250', 'Rwanda'], ['SM', '378', 'San Marino'], ['ST', '239', 'Sao Tome & Principe'], ['SN', '221', 'Senegal'], ['CS', '381', 'Serbia'], ['SC', '248', 'Seychelles'], ['SL', '232', 'Sierra Leone'], ['SG', '65', 'Singapore'], ['SK', '421', 'Slovak Republic'], ['SI', '386', 'Slovenia'], ['SB', '677', 'Solomon Islands'], ['SO', '252', 'Somalia'], ['ZA', '27', 'South Africa'], ['ES', '34', 'Spain'], ['LK', '94', 'Sri Lanka'], ['SH', '290', 'St. Helena'], ['KN', '1869', 'St. Kitts'], ['LC', '1758', 'St. Lucia'], ['SD', '249', 'Sudan'], ['SR', '597', 'Suriname'], ['SZ', '268', 'Swaziland'], ['SE', '46', 'Sweden'], ['CH', '41', 'Switzerland'], ['SY', '963', 'Syria'], ['TW', '886', 'Taiwan'], ['TJ', '7', 'Tajikstan'], ['TH', '66', 'Thailand'], ['TG', '228', 'Togo'], ['TO', '676', 'Tonga'], ['TT', '1868', 'Trinidad & Tobago'], ['TN', '216', 'Tunisia'], ['TR', '90', 'Turkey'], ['TM', '993', 'Turkmenistan'], ['TC', '1649', 'Turks & Caicos Islands'], ['TV', '688', 'Tuvalu'], ['UG', '256', 'Uganda'], ['UA', '380', 'Ukraine'], ['UY', '598', 'Uruguay'], ['UZ', '7', 'Uzbekistan'], ['VU', '678', 'Vanuatu'], ['VA', '379', 'Vatican City'], ['VE', '58', 'Venezuela'], ['VN', '84', 'Vietnam'], ['VG', '1284', 'Virgin Islands - British'], ['VI', '1340', 'Virgin Islands - US'], ['WF', '681', 'Wallis & Futuna'], ['YE', '969', 'Yemen (North)'], ['YE2', '967', 'Yemen (South)'], ['ZM', '260', 'Zambia'], ['ZW', '263', 'Zimbabwe']
 ];
 
 const teamMembers = [
@@ -354,22 +355,22 @@ export default function Home() {
               </blockquote>
               <div className="about-pills">
                 <div className="about-pill">
-                  <div className="ic"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+                  <div className="ic"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></svg></div>
                   <div className="t">Well-Read</div>
                   <div className="d">30 years of experience, witnessed!</div>
                 </div>
                 <div className="about-pill">
-                  <div className="ic"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z"/><path d="M16 8 2 22"/><path d="M17.5 15H9"/></svg></div>
+                  <div className="ic"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z" /><path d="M16 8 2 22" /><path d="M17.5 15H9" /></svg></div>
                   <div className="t">Original</div>
                   <div className="d">No templates, personalised!</div>
                 </div>
                 <div className="about-pill">
-                  <div className="ic"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg></div>
+                  <div className="ic"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></svg></div>
                   <div className="t">Non-Fiction</div>
                   <div className="d">Every penny accountable</div>
                 </div>
                 <div className="about-pill">
-                  <div className="ic"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
+                  <div className="ic"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg></div>
                   <div className="t">The Whole Plot</div>
                   <div className="d">Online + real-world, cover to cover</div>
                 </div>
@@ -570,19 +571,20 @@ export default function Home() {
               {teamMembers.map((member, i) => {
                 const carriImg = member.img.replace('.png', '-carri.png');
                 return (
-                <div key={i} className="spine-card reveal" style={{ transitionDelay: member.delay }}>
-                  <div className="spine-inner">
-                    <div className="spine-front" style={{ border: 'none', padding: '16px' }}>
-                      <div className="spine-bg-default" style={{ backgroundImage: `url('${carriImg}')` }}></div>
-                      <div className="spine-bg-hover" style={{ backgroundImage: `url('${member.img}')` }}></div>
-                      <div className="spine-label">
-                        <span className="spine-name">{member.name}</span>
-                        <span className="spine-role">{member.role}</span>
+                  <div key={i} className="spine-card reveal" style={{ transitionDelay: member.delay }}>
+                    <div className="spine-inner">
+                      <div className="spine-front" style={{ border: 'none', padding: '16px' }}>
+                        <div className="spine-bg-default" style={{ backgroundImage: `url('${carriImg}')` }}></div>
+                        <div className="spine-bg-hover" style={{ backgroundImage: `url('${member.img}')` }}></div>
+                        <div className="spine-label">
+                          <span className="spine-name">{member.name}</span>
+                          <span className="spine-role">{member.role}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              )})}
+                )
+              })}
             </div>
           </div>
         </section>
@@ -636,24 +638,36 @@ export default function Home() {
         {/* ===== CONTACT ===== */}
         <section id="contact">
           <div className="wrap">
-            <div className="reveal" style={{ maxWidth: '600px' }}>
-              <div className="eyebrow">The Book Return</div>
-              <h2 className="h-sec">From Dubai to the world :  Let&apos;s Talk</h2>
-              <blockquote className="lit-quote">
-                &quot;Call me Ishmael.&quot;
-                <span className="cite">— Herman Melville, Moby Dick</span>
-              </blockquote>
-            </div>
+
             <div className="contact-grid">
               <div className="contact-info reveal-left">
 
+                <div className="reveal" style={{ maxWidth: '600px' }}>
+                  <div className="eyebrow">The Book Return</div>
+                  <h2 className="h-sec">Let's Talk</h2>
+                  <blockquote className="lit-quote">
+                    &quot;Call me Ishmael.&quot;
+                    <span className="cite">— Herman Melville, Moby Dick</span>
+                  </blockquote>
+                </div>
+
                 <div className="ci">
-                  <div className="ic">📞</div>
-                  <div><div className="t">The Red Telephone</div><div className="v">+971 509 231 354</div></div>
+                  <div className="ic">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  </div>
+                  <div>
+                    <div className="t">The Red Telephone</div>
+                    <div className="v"><a href="tel:+971509231354" style={{ color: 'inherit', textDecoration: 'none' }}>+971 50 923 1354</a></div>
+                  </div>
                 </div>
                 <div className="ci">
-                  <div className="ic">✉️</div>
-                  <div><div className="t">Drop a note in the slot</div><div className="v">info@thestriveads.com</div></div>
+                  <div className="ic">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  </div>
+                  <div>
+                    <div className="t">Drop a note in the slot</div>
+                    <div className="v"><a href="mailto:info@thestriveads.com" style={{ color: 'inherit', textDecoration: 'none' }}>info@thestriveads.com</a></div>
+                  </div>
                 </div>
                 <div className="socials">
                   <a href="https://www.linkedin.com/company/thestriveads/" target="_blank" rel="noopener noreferrer">in</a>

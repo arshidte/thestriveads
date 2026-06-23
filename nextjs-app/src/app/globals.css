@@ -392,11 +392,13 @@ main {
 }
 
 .nav.scrolled .nav-inner {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(18px);
+  /* background: rgba(255, 255, 255, 0.75); */
+  backdrop-filter: blur(16px);
   border-radius: 22px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  /* border: 1px solid rgba(255, 255, 255, 0.4); */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  background: #ffffff36;
+  border: 1px solid #ffffff1c;
 }
 
 .logo {
@@ -2573,6 +2575,29 @@ section {
   outline: none;
   border-color: var(--lime);
   box-shadow: 0 0 0 3px rgba(124, 47, 224, 0.15);
+}
+
+.field input[type="file"] {
+  padding: 8px 10px;
+}
+
+.field input[type="file"]::file-selector-button {
+  background: var(--surface2);
+  color: var(--paper);
+  border: 1px solid var(--line);
+  padding: 6px 14px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-family: var(--font-b);
+  font-size: 13.5px;
+  transition: all 0.2s;
+  margin-right: 12px;
+}
+
+.field input[type="file"]::file-selector-button:hover {
+  background: rgba(124, 47, 224, 0.2);
+  border-color: var(--lime);
+  color: #fff;
 }
 
 .field {

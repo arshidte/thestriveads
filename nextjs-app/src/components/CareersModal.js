@@ -24,7 +24,7 @@ export default function CareersModal() {
           </svg>
         </button>
         <div className="modal-title">Join The Authors</div>
-        <div className="modal-sub">Tell us about your story and where you fit in our library.</div>
+        <div className="modal-sub">Tell us about your story and where you fit in.</div>
         <form
           className="form contact-form"
           onSubmit={(e) => {
@@ -46,13 +46,21 @@ export default function CareersModal() {
           </div>
           <div className="f-row">
             <div className="field">
+              <label>Phone</label>
+              <input type="tel" placeholder="+971 50 123 4567" required />
+            </div>
+            <div className="field">
               <label>Role / Position</label>
               <input type="text" placeholder="e.g. Media Buyer" required />
             </div>
-            <div className="field">
-              <label>Portfolio URL</label>
-              <input type="url" placeholder="https://..." />
-            </div>
+          </div>
+          <div className="field">
+            <label>Portfolio URL</label>
+            <input type="url" placeholder="https://..." />
+          </div>
+          <div className="field">
+            <label>Upload Resume/CV</label>
+            <input type="file" accept=".pdf,.doc,.docx" required style={{ paddingTop: '10px' }} />
           </div>
           <div className="field">
             <label>Why TheStriveAds?</label>
