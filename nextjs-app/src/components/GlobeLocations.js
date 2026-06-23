@@ -36,7 +36,7 @@ const locationsData = [
     left: '33%',
     width: '12%',
     height: '8%',
-    address: 'Almunjazat street, district- Al Nahda,\njeddah, KSA, 23523'
+    address: 'Almunjazat street, district- Al Nahda,\nJeddah, KSA, 23523'
   },
   {
     id: 'uae',

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ReadingProgress from '@/components/ReadingProgress';
 import BookmarkNav from '@/components/BookmarkNav';
 import BackgroundEffects from '@/components/BackgroundEffects';
@@ -41,16 +41,17 @@ const otherCountries = [
   ['DZ', '213', 'Algeria'], ['AD', '376', 'Andorra'], ['AO', '244', 'Angola'], ['AI', '1264', 'Anguilla'], ['AG', '1268', 'Antigua & Barbuda'], ['AR', '54', 'Argentina'], ['AM', '374', 'Armenia'], ['AW', '297', 'Aruba'], ['AU', '61', 'Australia'], ['AT', '43', 'Austria'], ['AZ', '994', 'Azerbaijan'], ['BS', '1242', 'Bahamas'], ['BD', '880', 'Bangladesh'], ['BB', '1246', 'Barbados'], ['BY', '375', 'Belarus'], ['BE', '32', 'Belgium'], ['BZ', '501', 'Belize'], ['BJ', '229', 'Benin'], ['BM', '1441', 'Bermuda'], ['BT', '975', 'Bhutan'], ['BO', '591', 'Bolivia'], ['BA', '387', 'Bosnia Herzegovina'], ['BW', '267', 'Botswana'], ['BR', '55', 'Brazil'], ['BN', '673', 'Brunei'], ['BG', '359', 'Bulgaria'], ['BF', '226', 'Burkina Faso'], ['BI', '257', 'Burundi'], ['KH', '855', 'Cambodia'], ['CM', '237', 'Cameroon'], ['CA', '1', 'Canada'], ['CV', '238', 'Cape Verde Islands'], ['KY', '1345', 'Cayman Islands'], ['CF', '236', 'Central African Republic'], ['CL', '56', 'Chile'], ['CN', '86', 'China'], ['CO', '57', 'Colombia'], ['KM', '269', 'Comoros'], ['CG', '242', 'Congo'], ['CK', '682', 'Cook Islands'], ['CR', '506', 'Costa Rica'], ['HR', '385', 'Croatia'], ['CU', '53', 'Cuba'], ['CY', '90392', 'Cyprus North'], ['CY', '357', 'Cyprus South'], ['CZ', '42', 'Czech Republic'], ['DK', '45', 'Denmark'], ['DJ', '253', 'Djibouti'], ['DM', '1809', 'Dominica'], ['DO', '1809', 'Dominican Republic'], ['EC', '593', 'Ecuador'], ['EG', '20', 'Egypt'], ['SV', '503', 'El Salvador'], ['GQ', '240', 'Equatorial Guinea'], ['ER', '291', 'Eritrea'], ['EE', '372', 'Estonia'], ['ET', '251', 'Ethiopia'], ['FK', '500', 'Falkland Islands'], ['FO', '298', 'Faroe Islands'], ['FJ', '679', 'Fiji'], ['FI', '358', 'Finland'], ['FR', '33', 'France'], ['GF', '594', 'French Guiana'], ['PF', '689', 'French Polynesia'], ['GA', '241', 'Gabon'], ['GM', '220', 'Gambia'], ['GE', '7880', 'Georgia'], ['DE', '49', 'Germany'], ['GH', '233', 'Ghana'], ['GI', '350', 'Gibraltar'], ['GR', '30', 'Greece'], ['GL', '299', 'Greenland'], ['GD', '1473', 'Grenada'], ['GP', '590', 'Guadeloupe'], ['GU', '671', 'Guam'], ['GT', '502', 'Guatemala'], ['GN', '224', 'Guinea'], ['GW', '245', 'Guinea - Bissau'], ['GY', '592', 'Guyana'], ['HT', '509', 'Haiti'], ['HN', '504', 'Honduras'], ['HK', '852', 'Hong Kong'], ['HU', '36', 'Hungary'], ['IS', '354', 'Iceland'], ['ID', '62', 'Indonesia'], ['IR', '98', 'Iran'], ['IQ', '964', 'Iraq'], ['IE', '353', 'Ireland'], ['IL', '972', 'Israel'], ['IT', '39', 'Italy'], ['JM', '1876', 'Jamaica'], ['JP', '81', 'Japan'], ['JO', '962', 'Jordan'], ['KZ', '7', 'Kazakhstan'], ['KE', '254', 'Kenya'], ['KI', '686', 'Kiribati'], ['KP', '850', 'Korea North'], ['KR', '82', 'Korea South'], ['KG', '996', 'Kyrgyzstan'], ['LA', '856', 'Laos'], ['LV', '371', 'Latvia'], ['LB', '961', 'Lebanon'], ['LS', '266', 'Lesotho'], ['LR', '231', 'Liberia'], ['LY', '218', 'Libya'], ['LI', '417', 'Liechtenstein'], ['LT', '370', 'Lithuania'], ['LU', '352', 'Luxembourg'], ['MO', '853', 'Macao'], ['MK', '389', 'Macedonia'], ['MG', '261', 'Madagascar'], ['MW', '265', 'Malawi'], ['MY', '60', 'Malaysia'], ['MV', '960', 'Maldives'], ['ML', '223', 'Mali'], ['MT', '356', 'Malta'], ['MH', '692', 'Marshall Islands'], ['MQ', '596', 'Martinique'], ['MR', '222', 'Mauritania'], ['YT', '269', 'Mayotte'], ['MX', '52', 'Mexico'], ['FM', '691', 'Micronesia'], ['MD', '373', 'Moldova'], ['MC', '377', 'Monaco'], ['MN', '976', 'Mongolia'], ['MS', '1664', 'Montserrat'], ['MA', '212', 'Morocco'], ['MZ', '258', 'Mozambique'], ['MM', '95', 'Myanmar'], ['NA', '264', 'Namibia'], ['NR', '674', 'Nauru'], ['NP', '977', 'Nepal'], ['NL', '31', 'Netherlands'], ['NC', '687', 'New Caledonia'], ['NZ', '64', 'New Zealand'], ['NI', '505', 'Nicaragua'], ['NE', '227', 'Niger'], ['NG', '234', 'Nigeria'], ['NU', '683', 'Niue'], ['NF', '672', 'Norfolk Islands'], ['NP2', '670', 'Northern Marianas'], ['NO', '47', 'Norway'], ['PW', '680', 'Palau'], ['PA', '507', 'Panama'], ['PG', '675', 'Papua New Guinea'], ['PY', '595', 'Paraguay'], ['PE', '51', 'Peru'], ['PH', '63', 'Philippines'], ['PL', '48', 'Poland'], ['PT', '351', 'Portugal'], ['PR', '1787', 'Puerto Rico'], ['RE', '262', 'Reunion'], ['RO', '40', 'Romania'], ['RU', '7', 'Russia'], ['RW', '250', 'Rwanda'], ['SM', '378', 'San Marino'], ['ST', '239', 'Sao Tome & Principe'], ['SN', '221', 'Senegal'], ['CS', '381', 'Serbia'], ['SC', '248', 'Seychelles'], ['SL', '232', 'Sierra Leone'], ['SG', '65', 'Singapore'], ['SK', '421', 'Slovak Republic'], ['SI', '386', 'Slovenia'], ['SB', '677', 'Solomon Islands'], ['SO', '252', 'Somalia'], ['ZA', '27', 'South Africa'], ['ES', '34', 'Spain'], ['LK', '94', 'Sri Lanka'], ['SH', '290', 'St. Helena'], ['KN', '1869', 'St. Kitts'], ['LC', '1758', 'St. Lucia'], ['SD', '249', 'Sudan'], ['SR', '597', 'Suriname'], ['SZ', '268', 'Swaziland'], ['SE', '46', 'Sweden'], ['CH', '41', 'Switzerland'], ['SY', '963', 'Syria'], ['TW', '886', 'Taiwan'], ['TJ', '7', 'Tajikstan'], ['TH', '66', 'Thailand'], ['TG', '228', 'Togo'], ['TO', '676', 'Tonga'], ['TT', '1868', 'Trinidad & Tobago'], ['TN', '216', 'Tunisia'], ['TR', '90', 'Turkey'], ['TM', '993', 'Turkmenistan'], ['TC', '1649', 'Turks & Caicos Islands'], ['TV', '688', 'Tuvalu'], ['UG', '256', 'Uganda'], ['UA', '380', 'Ukraine'], ['UY', '598', 'Uruguay'], ['UZ', '7', 'Uzbekistan'], ['VU', '678', 'Vanuatu'], ['VA', '379', 'Vatican City'], ['VE', '58', 'Venezuela'], ['VN', '84', 'Vietnam'], ['VG', '1284', 'Virgin Islands - British'], ['VI', '1340', 'Virgin Islands - US'], ['WF', '681', 'Wallis & Futuna'], ['YE', '969', 'Yemen (North)'], ['YE2', '967', 'Yemen (South)'], ['ZM', '260', 'Zambia'], ['ZW', '263', 'Zimbabwe']
 ];
 
-const teamMembers = [
-  { name: 'Aamir Khan', role: 'Founder & Strategist', img: '/Team1.png', delay: '0s' },
-  { name: 'Najmus Sakuib Khan', role: 'Co-Founder & Media', img: '/Team2.png', delay: '0.06s' },
-  { name: 'Vinayraj', role: 'Chief Business Officer', img: '/Team3.png', delay: '0.12s' },
-  { name: 'Saad Hashim', role: 'Lead - Sales', img: '/Team4.png', delay: '0.18s' },
-  { name: 'Monazir Khan', role: 'Ad-Operations', img: '/Team5.png', delay: '0.24s' },
-  { name: 'Arshid Diyan', role: 'Lead - Tech', img: '/Team6.png', delay: '0.3s' },
-  { name: 'Jishnu Prakash', role: 'Lead - Digital', img: '/Team7.png', delay: '0.3s' },
-  { name: 'Esha', role: 'Graphic Designer', img: '/Team8.png', delay: '0.3s' },
-  { name: 'Madeeha Firdose', role: 'Specialist - Digital', img: '/Team9.png', delay: '0.3s' },
+const teamRow1 = [
+  { name: 'Vinayraj', role: 'Chief Business Officer', img: '/Team3.png', delay: '0s' },
+  { name: 'Saad Hashim', role: 'Lead - Sales', img: '/Team4.png', delay: '0.06s' },
+  { name: 'Jishnu Prakash', role: 'Lead - Digital', img: '/Team7.png', delay: '0.12s' },
+];
+
+const teamRow2 = [
+  { name: 'Monazir Khan', role: 'Ad-Operations', img: '/Team5.png', delay: '0s' },
+  { name: 'Arshid Diyan', role: 'Lead - Tech', img: '/Team6.png', delay: '0.06s' },
+  { name: 'Esha', role: 'Graphic Designer', img: '/Team8.png', delay: '0.12s' },
+  { name: 'Madeeha Firdose', role: 'Specialist - Digital', img: '/Team9.png', delay: '0.18s' },
 ];
 
 export default function Home() {
@@ -58,6 +59,8 @@ export default function Home() {
   const marqueeRef = useRef(null);
   const marquee2Ref = useRef(null);
   const trackRef = useRef(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
 
   useEffect(() => {
     /* ===== CANVAS PARTICLES ===== */
@@ -230,6 +233,40 @@ export default function Home() {
     if (video) { video.pause(); video.currentTime = 0; }
   };
 
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: '', message: '' });
+
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    
+    // Combine country code and phone number
+    data.fullPhone = `+${data.countryCode} ${data.phone}`;
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setSubmitStatus({ type: 'success', message: 'Message sent successfully! We will get back to you soon.' });
+        e.target.reset();
+      } else {
+        const errorData = await response.json();
+        setSubmitStatus({ type: 'error', message: errorData.message || 'Something went wrong. Please try again later.' });
+      }
+    } catch (error) {
+      setSubmitStatus({ type: 'error', message: 'Network error. Please try again later.' });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <>
       <ReadingProgress />
@@ -246,7 +283,7 @@ export default function Home() {
           <div className="wrap hero-grid">
             <div className="reveal">
               <div className="hero-badge">
-                <span className="pill">360°</span> A new agency. Thirty years of stories on the shelves.
+                <span className="pill">360°</span> Marketing agency with 30 years of stories on the shelves.
               </div>
               <h1>
                 <span className="word"><em style={{ color: 'var(--lime)' }}>Marketing</em> Isn&apos;t a </span>
@@ -256,7 +293,7 @@ export default function Home() {
               </h1>
               <p className="lead">
                 <strong>30 years of global precision, packed into one powerhouse UAE agency.</strong><br /><br />
-                Most agencies throw ideas at the wall to see what sticks. We don&apos;t guess—we aim, we launch, and we hook the target. With three decades of international expertise, we turn complex 360° marketing into a series of flawless, calculated wins for your brand.
+                We do not throw ideas at the wall to see what sticks. We don&apos;t guess—we aim, we launch, and we hook the target. With three decades of international expertise, we turn complex 360° marketing into a series of flawless, calculated wins for your brand.
               </p>
               <div className="hero-cta">
                 <button className="btn btn-primary" onClick={scrollToContact}>
@@ -383,7 +420,7 @@ export default function Home() {
               <div className="est"><small>Collective experience</small><b>30+ yrs</b></div>
             </div>
           </div>
-          <div className="footnote reveal" style={{ fontSize: '22px', letterSpacing: '0.08em', color: 'var(--paper-dim)', marginBottom: '10px', fontFamily: 'var(--font-q)', fontStyle: 'italic' }}>
+          <div className="footnote reveal penny-wise-text">
             Penny Wise! Pound Wise!
           </div>
         </section>
@@ -474,9 +511,9 @@ export default function Home() {
             <div style={{ display: 'flex', gap: '40px', alignItems: 'center', marginBottom: '48px', flexWrap: 'wrap' }}>
               <div className="reveal" style={{ flex: 1, minWidth: '300px', maxWidth: '760px' }}>
                 <div className="eyebrow">The Critique</div>
-                <h2 className="h-sec">Why This Book Will<br />Change Your Life.</h2>
+                <h2 className="h-sec">Why This Book Will<br />Change Your Life?</h2>
                 <p className="sub" style={{ maxWidth: '680px' }}>
-                  Why work with a new agency? Because the spine may be fresh, but the pages have been written across global networks for three decades. Here&apos;s the honest review.
+                  Why us? Our spine are fresh and the pages have been written across global networks for three decades. Here&apos;s the honest review.
                 </p>
                 <blockquote className="lit-quote">
                   &quot;The only thing you absolutely have to know, is the location of the library.&quot;
@@ -567,11 +604,66 @@ export default function Home() {
                 <span className="cite">— Mark Twain</span>
               </blockquote>
             </div>
-            <div className="team-spines" style={{ marginTop: '80px' }}>
-              {teamMembers.map((member, i) => {
+
+            {/* ===== FOUNDERS SHOWCASE ===== */}
+            <div className="founders-showcase reveal">
+              {/* Aamir */}
+              <div className="founder-card">
+                <div className="fc-img-wrapper">
+                   <div className="spine-bg-default" style={{ backgroundImage: `url('/Team1-carri.png')` }}></div>
+                   <div className="spine-bg-hover" style={{ backgroundImage: `url('/Team1.png')` }}></div>
+                </div>
+                <div className="fc-text-wrapper">
+                  <div className="fc-text-inner">
+                     <h3>Aamir Khan</h3>
+                     <p className="fc-role">FOUNDER & STRATEGIST</p>
+                     <blockquote>&quot;Marketing is not a game of chance. It is an act of engineering data, and storytelling. We build calculated frameworks that turn curiosity into commitment.&quot;</blockquote>
+                     <p className="fc-desc">Aamir directs the agency&apos;s primary performance strategy, performance marketing, and creative production wings, helping international brands scale their client conversions.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sakuib */}
+              <div className="founder-card">
+                <div className="fc-img-wrapper">
+                   <div className="spine-bg-default" style={{ backgroundImage: `url('/Team2-carri.png')` }}></div>
+                   <div className="spine-bg-hover" style={{ backgroundImage: `url('/Team2.png')` }}></div>
+                </div>
+                <div className="fc-text-wrapper">
+                  <div className="fc-text-inner">
+                     <h3>Najmus Sakuib Khan</h3>
+                     <p className="fc-role">Co-FOUNDER & INDEPENDENT ANALYST</p>
+                     <blockquote>&quot;Our core mission is straightforward: to eliminate passive advertising spaces entirely. By combining premium hardware engineering with dynamic digital screen layouts, we ensure every slot serves a calculated intent. We focus on putting your message directly in front of active high-value decision makers.&quot;</blockquote>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="team-row-3" style={{ marginTop: '80px' }}>
+              {teamRow1.map((member, i) => {
                 const carriImg = member.img.replace('.png', '-carri.png');
                 return (
-                  <div key={i} className="spine-card reveal" style={{ transitionDelay: member.delay }}>
+                  <div key={`r1-${i}`} className="spine-card reveal" style={{ transitionDelay: member.delay }}>
+                    <div className="spine-inner">
+                      <div className="spine-front" style={{ border: 'none', padding: '16px' }}>
+                        <div className="spine-bg-default" style={{ backgroundImage: `url('${carriImg}')` }}></div>
+                        <div className="spine-bg-hover" style={{ backgroundImage: `url('${member.img}')` }}></div>
+                        <div className="spine-label">
+                          <span className="spine-name">{member.name}</span>
+                          <span className="spine-role">{member.role}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+            <div className="team-spines" style={{ marginTop: '20px' }}>
+              {teamRow2.map((member, i) => {
+                const carriImg = member.img.replace('.png', '-carri.png');
+                return (
+                  <div key={`r2-${i}`} className="spine-card reveal" style={{ transitionDelay: member.delay }}>
                     <div className="spine-inner">
                       <div className="spine-front" style={{ border: 'none', padding: '16px' }}>
                         <div className="spine-bg-default" style={{ backgroundImage: `url('${carriImg}')` }}></div>
@@ -676,16 +768,16 @@ export default function Home() {
                   <a href="https://www.youtube.com/channel/UC3Ma4iNkWr78-F_qKfwx7GQ" target="_blank" rel="noopener noreferrer">yt</a>
                 </div>
               </div>
-              <div className="form reveal-right" style={{ transitionDelay: '0.1s' }}>
+              <form className="form reveal-right" style={{ transitionDelay: '0.1s' }} onSubmit={handleContactSubmit}>
                 <div className="f-row">
-                  <div className="field"><label>Full name</label><input type="text" placeholder="Your name" /></div>
-                  <div className="field"><label>Email</label><input type="email" placeholder="you@company.com" /></div>
+                  <div className="field"><label>Full name</label><input type="text" name="fullName" placeholder="Your name" required /></div>
+                  <div className="field"><label>Email</label><input type="email" name="email" placeholder="you@company.com" required /></div>
                 </div>
                 <div className="f-row">
                   <div className="field">
                     <label>Phone</label>
                     <div style={{ display: 'flex', gap: '8px' }}>
-                      <select style={{ width: '130px', cursor: 'pointer' }}>
+                      <select name="countryCode" style={{ width: '130px', cursor: 'pointer' }}>
                         {countryOptions.map((c) => (
                           <option key={c.code} data-countrycode={c.code} value={c.value}>{c.label}</option>
                         ))}
@@ -695,33 +787,40 @@ export default function Home() {
                           ))}
                         </optgroup>
                       </select>
-                      <input type="tel" placeholder="050 123 4567" style={{ flex: 1 }} />
+                      <input type="tel" name="phone" placeholder="050 123 4567" style={{ flex: 1 }} required />
                     </div>
                   </div>
-                  <div className="field"><label>Company</label><input type="text" placeholder="Brand / company" /></div>
+                  <div className="field"><label>Company</label><input type="text" name="company" placeholder="Brand / company" /></div>
                 </div>
                 <div className="field">
                   <label>Which section of the archives?</label>
-                  <select>
-                    <option>Select a section…</option>
-                    <option>Media Buying &amp; OOH / DOOH</option>
-                    <option>Social &amp; Performance Marketing</option>
-                    <option>PR &amp; Ad Production</option>
-                    <option>Event Management</option>
-                    <option>The whole anthology (360°)</option>
+                  <select name="section">
+                    <option value="">Select a section…</option>
+                    <option value="Media Buying & OOH / DOOH">Media Buying &amp; OOH / DOOH</option>
+                    <option value="Social & Performance Marketing">Social &amp; Performance Marketing</option>
+                    <option value="PR & Ad Production">PR &amp; Ad Production</option>
+                    <option value="Event Management">Event Management</option>
+                    <option value="The whole anthology (360°)">The whole anthology (360°)</option>
                   </select>
                 </div>
-                <div className="field"><label>Your story so far</label><textarea placeholder="Tell us about your brand and goals…"></textarea></div>
-                <button className="btn btn-primary">
-                  Send message{' '}
-                  <span className="btn-arrow">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="7" y1="17" x2="17" y2="7"></line>
-                      <polyline points="7 7 17 7 17 17"></polyline>
-                    </svg>
-                  </span>
+                <div className="field"><label>Your story so far</label><textarea name="message" placeholder="Tell us about your brand and goals…" required></textarea></div>
+                <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                  {isSubmitting ? 'Sending...' : 'Send message'}{' '}
+                  {!isSubmitting && (
+                    <span className="btn-arrow">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                      </svg>
+                    </span>
+                  )}
                 </button>
-              </div>
+                {submitStatus.message && (
+                  <div style={{ marginTop: '16px', padding: '12px', borderRadius: '8px', fontSize: '14px', backgroundColor: submitStatus.type === 'success' ? 'rgba(107, 16, 201, 0.1)' : 'rgba(255, 0, 0, 0.1)', color: submitStatus.type === 'success' ? 'var(--lime)' : '#ff4444', border: `1px solid ${submitStatus.type === 'success' ? 'var(--lime)' : '#ff4444'}` }}>
+                    {submitStatus.message}
+                  </div>
+                )}
+              </form>
             </div>
           </div>
         </section>
