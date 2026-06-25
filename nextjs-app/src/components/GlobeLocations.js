@@ -5,10 +5,10 @@ const locationsData = [
   {
     id: 'uk',
     name: 'United Kingdom',
-    top: '18.3%',
-    left: '5.5%',
-    width: '11%',
-    height: '7%',
+    top: '17.3%',
+    left: '5%',
+    width: '13%',
+    height: '9%',
     address: 'Office No 4 St James House, 27-43 Eastern Road,\nRomford, United Kingdom, RM1 3NH'
   },
   {
@@ -17,8 +17,7 @@ const locationsData = [
     top: '26%',
     left: '50%',
     width: '14%',
-    height: '8%',
-    address: 'Soğanlı Mahallesi İstanbul Caddesi no:333/1-105 Osmangazi, Bursa-Turkiye'
+    height: '8%'
   },
   {
     id: 'india',
@@ -137,9 +136,11 @@ export default function GlobeLocations() {
                 pointerEvents: 'none'
               }}></div>
               <h3 style={{ color: 'var(--lime)', fontSize: '28px', marginBottom: '16px', fontWeight: 'bold' }}>{activeLocation.name}</h3>
-              <p style={{ fontSize: '18px', color: 'var(--paper)', whiteSpace: 'pre-line', lineHeight: '1.6' }}>
-                {activeLocation.address}
-              </p>
+              {activeLocation.address && (
+                <p style={{ fontSize: '18px', color: 'var(--paper)', whiteSpace: 'pre-line', lineHeight: '1.6' }}>
+                  {activeLocation.address}
+                </p>
+              )}
             </div>
           </div>
         </div>

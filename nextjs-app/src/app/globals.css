@@ -1109,14 +1109,8 @@ section {
 
 .device .screen {
   position: relative;
-  aspect-ratio: 4/5;
   border-radius: 12px;
   overflow: visible;
-  background: url("/image 1.png") center/cover no-repeat;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 18px;
 }
 
 .device .screen>* {
@@ -1125,7 +1119,7 @@ section {
 }
 
 /* ===== HERO HOTSPOT OVERLAYS ===== */
-.hotspot {
+.device .screen .hotspot {
   position: absolute;
   z-index: 50;
   cursor: pointer;
@@ -3272,7 +3266,7 @@ footer {
   /* Right-aligned callouts (Hotspot 5 at 65%) */
   .hotspot:nth-child(6) .callout {
     left: auto;
-    right: -15px;
+    right: -45px;
     top: calc(100% + 12px);
     transform: translateY(8px);
   }

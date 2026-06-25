@@ -12,6 +12,40 @@ export default function CareersModal() {
     window.__openCareersModal = () => setIsOpen(true);
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: '', message: '' });
+
+    const formData = new FormData(e.target);
+
+    try {
+      const response = await fetch('/submit.php', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        setSubmitStatus({ type: 'success', message: 'Application submitted! We will be in touch.' });
+        e.target.reset();
+        setTimeout(() => {
+          setIsOpen(false);
+          setSubmitStatus({ type: '', message: '' });
+        }, 3000);
+      } else {
+        const errorData = await response.json();
+        setSubmitStatus({ type: 'error', message: errorData.message || 'Something went wrong. Please ensure your endpoint is correct.' });
+      }
+    } catch (error) {
+      setSubmitStatus({ type: 'error', message: 'Network error. Please try again later.' });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div
       className={`modal-overlay${isOpen ? ' show' : ''}`}
@@ -27,68 +61,38 @@ export default function CareersModal() {
         </button>
         <div className="modal-title">Join The Authors</div>
         <div className="modal-sub">Tell us about your story and where you fit in.</div>
-        <form
-          className="form contact-form"
-          onSubmit={async (e) => {
-            e.preventDefault();
-            setIsSubmitting(true);
-            setSubmitStatus({ type: '', message: '' });
-
-            const formData = new FormData(e.target);
-
-            try {
-              const response = await fetch('/api/careers', {
-                method: 'POST',
-                body: formData, // Send FormData directly for file uploads
-              });
-
-              if (response.ok) {
-                setSubmitStatus({ type: 'success', message: 'Application submitted! We will be in touch.' });
-                e.target.reset();
-                setTimeout(() => {
-                  setIsOpen(false);
-                  setSubmitStatus({ type: '', message: '' });
-                }, 3000);
-              } else {
-                const errorData = await response.json();
-                setSubmitStatus({ type: 'error', message: errorData.message || 'Something went wrong. Please try again later.' });
-              }
-            } catch (error) {
-              setSubmitStatus({ type: 'error', message: 'Network error. Please try again later.' });
-            } finally {
-              setIsSubmitting(false);
-            }
-          }}
-        >
+        <form onSubmit={handleSubmit}>
+          <input type="hidden" name="formType" id="careersFormType" value="Careers Application" />
           <div className="f-row">
             <div className="field">
-              <label>Full Name</label>
-              <input type="text" name="fullName" placeholder="John Doe" required />
+              <label htmlFor="careersFullName">Full Name</label>
+              <input type="text" name="fullName" id="careersFullName" placeholder="John Doe" required />
             </div>
             <div className="field">
-              <label>Email</label>
-              <input type="email" name="email" placeholder="john@example.com" required />
+              <label htmlFor="careersEmail">Email</label>
+              <input type="email" name="email" id="careersEmail" placeholder="john@example.com" required />
             </div>
           </div>
           <div className="f-row">
             <div className="field">
-              <label>Phone</label>
-              <input type="tel" name="phone" placeholder="+971 50 123 4567" required />
+              <label htmlFor="careersPhone">Phone</label>
+              <input type="tel" name="phone" id="careersPhone" placeholder="+971 50 123 4567" required />
             </div>
             <div className="field">
-              <label>Role / Position</label>
-              <input type="text" name="role" placeholder="e.g. Media Buyer" required />
+              <label htmlFor="careersRole">Role / Position</label>
+              <input type="text" name="role" id="careersRole" placeholder="e.g. Media Buyer" required />
             </div>
           </div>
           <div className="field">
-            <label>Portfolio URL</label>
-            <input type="url" name="portfolio" placeholder="https://..." />
+            <label htmlFor="careersPortfolio">Portfolio URL</label>
+            <input type="url" name="portfolio" id="careersPortfolio" placeholder="https://..." />
           </div>
           <div className="field">
-            <label>Upload Resume/CV <span style={{ fontSize: '11px', color: 'var(--paper-dim)', marginLeft: '6px' }}>(Max 5 MB)</span></label>
+            <label htmlFor="careersResume">Upload Resume/CV <span style={{ fontSize: '11px', color: 'var(--paper-dim)', marginLeft: '6px' }}>(Max 5 MB)</span></label>
             <input 
               type="file" 
               name="resume"
+              id="careersResume"
               accept=".pdf,.doc,.docx" 
               required 
               style={{ paddingTop: '10px' }} 
@@ -102,18 +106,15 @@ export default function CareersModal() {
             />
           </div>
           <div className="field">
-            <label>Why TheStriveAds?</label>
-            <textarea name="coverLetter" placeholder="Write a short cover letter..." required></textarea>
+            <label htmlFor="careersCoverLetter">Why TheStriveAds?</label>
+            <textarea name="coverLetter" id="careersCoverLetter" placeholder="Write a short cover letter..." required></textarea>
           </div>
           <button type="submit" className="btn btn-primary" style={{ width: '100%' }} disabled={isSubmitting}>
             {isSubmitting ? 'Submitting...' : 'Submit Application'}{' '}
             {!isSubmitting && (
-              <span className="btn-arrow">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="7" y1="17" x2="17" y2="7"></line>
-                  <polyline points="7 7 17 7 17 17"></polyline>
-                </svg>
-              </span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginLeft: '8px' }}>
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
             )}
           </button>
           {submitStatus.message && (

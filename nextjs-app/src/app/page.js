@@ -239,18 +239,22 @@ export default function Home() {
     setSubmitStatus({ type: '', message: '' });
 
     const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
     
-    // Combine country code and phone number
-    data.fullPhone = `+${data.countryCode} ${data.phone}`;
+    // Format phone
+    const phone = formData.get('phone');
+    const countryCode = formData.get('countryCode');
+    if (phone && countryCode) {
+      formData.set('phone', `+${countryCode} ${phone}`);
+      formData.delete('countryCode');
+    }
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('/submit.php', {
         method: 'POST',
+        body: formData,
         headers: {
-          'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        body: JSON.stringify(data),
       });
 
       if (response.ok) {
@@ -258,7 +262,7 @@ export default function Home() {
         e.target.reset();
       } else {
         const errorData = await response.json();
-        setSubmitStatus({ type: 'error', message: errorData.message || 'Something went wrong. Please try again later.' });
+        setSubmitStatus({ type: 'error', message: errorData.message || 'Something went wrong. Please try again.' });
       }
     } catch (error) {
       setSubmitStatus({ type: 'error', message: 'Network error. Please try again later.' });
@@ -324,44 +328,45 @@ export default function Home() {
             <div className="reveal" style={{ transitionDelay: '0.15s' }}>
               <div className="device">
                 <div className="screen">
+                  <img src="/image 1.png" alt="Services Mockup" style={{ width: '100%', display: 'block', borderRadius: '12px', objectFit: 'contain' }} />
                   <div className="glin"></div>
                   {/* Service Hotspots */}
-                  <div className="hotspot callout-left" style={{ left: '-7.5%', top: '48%', width: '22%', height: '5%' }}>
+                  <div className="hotspot callout-left" style={{ left: '1.7%', top: '48%', width: '20%', height: '5%' }}>
                     <div className="hotspot-zone"></div>
                     <div className="callout">
                       <div className="callout-title">Media Buying | Global Connectivity</div>
                       <div className="callout-desc">We don&apos;t just buy space; we dominate geography. Leveraging a 30-year global network to position your brand on the world&apos;s most lucrative stages at unmatched rates.</div>
                     </div>
                   </div>
-                  <div className="hotspot" style={{ left: '6%', top: '25%', width: '20%', height: '5%' }}>
+                  <div className="hotspot" style={{ left: '12.3%', top: '43.5%', width: '18%', height: '5%' }}>
                     <div className="hotspot-zone"></div>
                     <div className="callout">
                       <div className="callout-title">Social Media | Digital Storytelling</div>
                       <div className="callout-desc">Cultivating communities, stop-scrolling aesthetics, and culture-shaping content. We transform digital noise into meaningful, loyal brand equity.</div>
                     </div>
                   </div>
-                  <div className="hotspot" style={{ left: '18%', top: '8%', width: '22%', height: '7%' }}>
+                  <div className="hotspot" style={{ left: '22.6%', top: '45.5%', width: '20%', height: '7%' }}>
                     <div className="hotspot-zone"></div>
                     <div className="callout">
                       <div className="callout-title">Performance Marketing | Data Debut</div>
                       <div className="callout-desc">Hyper-targeted, conversion-obsessed, and ruthlessly optimized. We track the metrics that actually matter to turn your ad spend into pure ROI.</div>
                     </div>
                   </div>
-                  <div className="hotspot" style={{ left: '34%', bottom: '17%', width: '20%', height: '5%' }}>
+                  <div className="hotspot" style={{ left: '35.6%', bottom: '54%', width: '18%', height: '5%' }}>
                     <div className="hotspot-zone"></div>
                     <div className="callout">
                       <div className="callout-title">Ad Production | Cinematic Craft</div>
                       <div className="callout-desc">Visuals that command attention. From high-octane commercial productions to thumb-stopping digital assets, we build the premium lens your brand deserves.</div>
                     </div>
                   </div>
-                  <div className="hotspot" style={{ left: '65%', bottom: '38%', width: '18%', height: '5%' }}>
+                  <div className="hotspot" style={{ left: '61.8%', bottom: '57%', width: '16%', height: '5%' }}>
                     <div className="hotspot-zone"></div>
                     <div className="callout">
                       <div className="callout-title">Event &amp; OOH | Real-World Brilliance</div>
                       <div className="callout-desc">Immersive brand experiences that break the physical mold. From massive, jaw-dropping outdoor displays across the UAE skyline to premium experiential pop-ups.</div>
                     </div>
                   </div>
-                  <div className="hotspot callout-right" style={{ left: '44%', bottom: '52%', width: '28%', height: '5%' }}>
+                  <div className="hotspot callout-right" style={{ left: '44.6%', bottom: '52%', width: '25%', height: '5%' }}>
                     <div className="hotspot-zone"></div>
                     <div className="callout">
                       <div className="callout-title">PR &amp; Communication | Public Amplification</div>
@@ -697,7 +702,7 @@ export default function Home() {
                   <div className="quote">&quot;The StriveAds LLC delivered exceptional marketing results for SKR Building Contracting. Their team is professional, highly responsive, and truly understands our industry. We highly recommend their services.&quot;</div>
                   <div className="who">
                     <div className="av">S</div>
-                    <div><div className="nm">Saud Khan</div><div className="ro">Procurement Manager, SKR building contracting LLC</div></div>
+                    <div><div className="nm">Saud Khan</div><div className="ro">Procurement Manager, SKR Building Contracting LLC</div></div>
                   </div>
                 </div>
                 <div className="tcard">
@@ -762,22 +767,48 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="socials">
-                  <a href="https://www.linkedin.com/company/thestriveads/" target="_blank" rel="noopener noreferrer">in</a>
-                  <a href="https://www.instagram.com/thestriveads/" target="_blank" rel="noopener noreferrer">ig</a>
-                  <a href="https://www.facebook.com/profile.php?id=61589316515631" target="_blank" rel="noopener noreferrer">fb</a>
-                  <a href="https://www.youtube.com/channel/UC3Ma4iNkWr78-F_qKfwx7GQ" target="_blank" rel="noopener noreferrer">yt</a>
+                  <a href="https://www.linkedin.com/company/thestriveads/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                      <rect width="4" height="12" x="2" y="9"/>
+                      <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                  </a>
+                  <a href="https://www.instagram.com/thestriveads/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                    </svg>
+                  </a>
+                  <a href="https://www.facebook.com/profile.php?id=61589316515631" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                    </svg>
+                  </a>
+                  <a href="https://www.youtube.com/channel/UC3Ma4iNkWr78-F_qKfwx7GQ" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17z"/>
+                      <polygon points="10 15 15 12 10 9"/>
+                    </svg>
+                  </a>
                 </div>
               </div>
-              <form className="form reveal-right" style={{ transitionDelay: '0.1s' }} onSubmit={handleContactSubmit}>
+              <form 
+                className="form reveal-right" 
+                style={{ transitionDelay: '0.1s' }} 
+                onSubmit={handleContactSubmit}
+              >
+                <input type="hidden" name="formType" id="contactFormType" value="Contact Us" />
                 <div className="f-row">
-                  <div className="field"><label>Full name</label><input type="text" name="fullName" placeholder="Your name" required /></div>
-                  <div className="field"><label>Email</label><input type="email" name="email" placeholder="you@company.com" required /></div>
+                  <div className="field"><label htmlFor="fullName">Full name</label><input type="text" name="fullName" id="fullName" placeholder="Your name" required /></div>
+                  <div className="field"><label htmlFor="email">Email</label><input type="email" name="email" id="email" placeholder="you@company.com" required /></div>
                 </div>
                 <div className="f-row">
                   <div className="field">
-                    <label>Phone</label>
+                    <label htmlFor="phone">Phone</label>
                     <div style={{ display: 'flex', gap: '8px' }}>
-                      <select name="countryCode" style={{ width: '130px', cursor: 'pointer' }}>
+                      <select name="countryCode" id="countryCode" style={{ width: '130px', cursor: 'pointer' }}>
                         {countryOptions.map((c) => (
                           <option key={c.code} data-countrycode={c.code} value={c.value}>{c.label}</option>
                         ))}
@@ -787,14 +818,14 @@ export default function Home() {
                           ))}
                         </optgroup>
                       </select>
-                      <input type="tel" name="phone" placeholder="050 123 4567" style={{ flex: 1 }} required />
+                      <input type="tel" name="phone" id="phone" placeholder="050 123 4567" style={{ flex: 1 }} required />
                     </div>
                   </div>
-                  <div className="field"><label>Company</label><input type="text" name="company" placeholder="Brand / company" /></div>
+                  <div className="field"><label htmlFor="company">Company</label><input type="text" name="company" id="company" placeholder="Brand / company" /></div>
                 </div>
                 <div className="field">
-                  <label>Which section of the archives?</label>
-                  <select name="section">
+                  <label htmlFor="section">Which section of the archives?</label>
+                  <select name="section" id="section">
                     <option value="">Select a section…</option>
                     <option value="Media Buying & OOH / DOOH">Media Buying &amp; OOH / DOOH</option>
                     <option value="Social & Performance Marketing">Social &amp; Performance Marketing</option>
@@ -803,7 +834,7 @@ export default function Home() {
                     <option value="The whole anthology (360°)">The whole anthology (360°)</option>
                   </select>
                 </div>
-                <div className="field"><label>Your story so far</label><textarea name="message" placeholder="Tell us about your brand and goals…" required></textarea></div>
+                <div className="field"><label htmlFor="message">Your story so far</label><textarea name="message" id="message" placeholder="Tell us about your brand and goals…" required></textarea></div>
                 <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
                   {isSubmitting ? 'Sending...' : 'Send message'}{' '}
                   {!isSubmitting && (

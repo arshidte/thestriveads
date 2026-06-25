@@ -4,12 +4,12 @@ import { useEffect, useState, useRef } from 'react';
 
 const sections = [
   'hero-section', 'about', 'services', 'why',
-  'team', 'borrowing-history', 'testimonials', 'contact'
+  'borrowing-history', 'team', 'testimonials', 'contact'
 ];
 
 const labels = [
   'Front Desk', 'The Catalog', 'The Archives', 'The Critique',
-  'The Co-Authors', 'The Index', 'Reviews', 'Inquiries'
+  'The Index', 'The Co-Authors', 'Reviews', 'Inquiries'
 ];
 
 export default function BookmarkNav() {

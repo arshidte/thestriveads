@@ -32,8 +32,8 @@ export default function MobileMenu() {
         <a href="#about">The Catalog</a>
         <a href="#services">The Archives</a>
         <a href="#why">The Critique</a>
-        <a href="#team">The Co-Authors</a>
         <a href="#borrowing-history">The Index</a>
+        <a href="#team">The Co-Authors</a>
         <a href="#testimonials">Reader Reviews</a>
         <a href="#contact">Inquiries</a>
       </div>

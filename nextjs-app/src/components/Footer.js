@@ -56,7 +56,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="foot-bottom">
-          <span>© {new Date().getFullYear()} TheStriveAds. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} TheStriveAds. All rights reserved. <br/> Website developed and maintained by The Strive ads</span>
           <span>
             <a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Sitemap</a>
           </span>
